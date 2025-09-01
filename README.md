@@ -66,3 +66,27 @@ We have a yearly user group meeting (the UGM) where members of the community do 
 ## License
 
 Code released under the [BSD license](https://github.com/rdkit/rdkit/blob/master/license.txt).
+
+## Build with vcpkg (CMake manifest mode)
+
+You can build RDKit using vcpkg-managed dependencies via the provided `vcpkg.json` manifest.
+
+- Clone and bootstrap vcpkg next to the source tree:
+  - Unix/macOS:
+    - `git clone https://github.com/microsoft/vcpkg.git`
+    - `./vcpkg/bootstrap-vcpkg.sh`
+  - Windows (PowerShell):
+    - `git clone https://github.com/microsoft/vcpkg.git`
+    - `.\vcpkg\bootstrap-vcpkg.bat`
+
+- Configure with the vcpkg toolchain and manifest mode:
+  - `cmake --preset vcpkg-release`
+  - or: `cmake -S . -B build/vcpkg-release -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_FEATURE_FLAGS=manifests`
+
+- Build:
+  - `cmake --build build/vcpkg-release -j`
+
+Notes:
+- The manifest includes common dependencies like `boost`, `eigen3`, `catch2`, and graphics libs. Toggle optional features with RDKit’s CMake options.
+- Python wrappers require a local Python 3 development environment. Disable with `-DRDK_BUILD_PYTHON_WRAPPERS=OFF` if not needed.
+- With vcpkg, RDKit prefers a preinstalled `better-enums` header and only fetches it as a fallback.

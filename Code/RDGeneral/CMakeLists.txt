@@ -5,10 +5,18 @@ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/versions.h.cmake
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/RDConfig.h.cmake
         ${CMAKE_CURRENT_SOURCE_DIR}/RDConfig.h)
 
-FetchContent_MakeAvailable(better_enums)
+# Prefer a preinstalled/header-only better-enums (e.g., via vcpkg),
+# and fall back to FetchContent only if not available.
 if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/enum.h)
-    file(COPY ${better_enums_SOURCE_DIR}/enum.h DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
-endif (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/enum.h)
+    # Try to locate enum.h on the include path first (works with vcpkg)
+    find_path(BETTER_ENUMS_INCLUDE_DIR enum.h)
+    if (BETTER_ENUMS_INCLUDE_DIR)
+        file(COPY ${BETTER_ENUMS_INCLUDE_DIR}/enum.h DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+    else()
+        FetchContent_MakeAvailable(better_enums)
+        file(COPY ${better_enums_SOURCE_DIR}/enum.h DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+    endif()
+endif ()
 
 rdkit_library(RDGeneral
         Invariant.cpp types.cpp utils.cpp RDGeneralExceptions.cpp RDLog.cpp
