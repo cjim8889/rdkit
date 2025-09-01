@@ -1,7 +1,7 @@
 {
-  "name": "rdkit-local",
-  "version-string": "0.0.0",
-  "description": "RDKit core C++ build (vcpkg-managed)",
+  "name": "rdkit",
+  "version-string": "0.0.1",
+  "description": "RDKit core C++ build",
   "dependencies": [
     "better-enums",
     "boost-iostreams",
@@ -13,7 +13,6 @@
     "cairo",
     "eigen3",
     "freetype",
-    "zlib",
-    "mesa"
+    "zlib"
   ]
 }

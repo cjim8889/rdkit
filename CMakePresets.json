@@ -1,8 +1,8 @@
 {
-  "version": 3,
+  "version": 6,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 21,
+    "minor": 18,
     "patch": 0
   },
   "configurePresets": [
@@ -10,13 +10,15 @@
       "name": "vcpkg-release",
       "displayName": "vcpkg | Release",
       "binaryDir": "${sourceDir}/build/vcpkg-release",
-      
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
         "VCPKG_FEATURE_FLAGS": "manifests",
-        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+        "_GLIBCXX_USE_CXX11_ABI": "1",
         "RDK_INSTALL_INTREE": "OFF",
         "RDK_INSTALL_STATIC_LIBS": "OFF",
         "RDK_BUILD_CPP_TESTS": "OFF",
@@ -38,11 +40,6 @@
       }
     },
     {
-      "name": "vcpkg-release-werror",
-      "displayName": "vcpkg | Release (Werror)",
-      "inherits": "vcpkg-release"
-    },
-    {
       "name": "vcpkg-debug",
       "displayName": "vcpkg | Debug",
       "inherits": "vcpkg-release",
@@ -57,12 +54,6 @@
       "name": "vcpkg-release-build",
       "displayName": "Build | vcpkg Release",
       "configurePreset": "vcpkg-release",
-      "configuration": "Release"
-    },
-    {
-      "name": "vcpkg-release-werror-build",
-      "displayName": "Build | vcpkg Release (Werror)",
-      "configurePreset": "vcpkg-release-werror",
       "configuration": "Release"
     },
     {
