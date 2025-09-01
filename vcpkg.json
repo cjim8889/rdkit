@@ -1,23 +1,17 @@
 {
   "name": "rdkit-local",
   "version-string": "0.0.0",
-  "description": "RDKit build with vcpkg-managed dependencies",
+  "description": "RDKit core C++ build (vcpkg-managed)",
   "dependencies": [
-    "boost-assign",
-    "boost-crc",
-    "boost-filesystem",
-    "boost-flyweight",
-    "boost-iostreams",
-    "boost-locale",
-    "boost-log",
-    "boost-multi-array",
-    "boost-multiprecision",
-    "boost-program-options",
-    "boost-property-tree",
-    "boost-regex",
-    "eigen3",
-    "catch2",
     "better-enums",
-    "zlib"
+    "boost-iostreams",
+    "boost-serialization",
+    "boost-graph",
+    "bzip2",
+    "cairo",
+    "eigen3",
+    "freetype",
+    "zlib",
+    "mesa"
   ]
 }

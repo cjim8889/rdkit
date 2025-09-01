@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
     "minor": 21,
@@ -10,11 +10,37 @@
       "name": "vcpkg-release",
       "displayName": "vcpkg | Release",
       "binaryDir": "${sourceDir}/build/vcpkg-release",
+      
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_FEATURE_FLAGS": "manifests"
+        "VCPKG_FEATURE_FLAGS": "manifests",
+        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+        "RDK_INSTALL_INTREE": "OFF",
+        "RDK_INSTALL_STATIC_LIBS": "OFF",
+        "RDK_BUILD_CPP_TESTS": "OFF",
+        "RDK_BUILD_PYTHON_WRAPPERS": "OFF",
+        "RDK_BUILD_COORDGEN_SUPPORT": "OFF",
+        "RDK_BUILD_MAEPARSER_SUPPORT": "OFF",
+        "RDK_OPTIMIZE_POPCNT": "ON",
+        "RDK_BUILD_AVALON_SUPPORT": "ON",
+        "RDK_BUILD_INCHI_SUPPORT": "ON",
+        "RDK_BUILD_YAEHMOP_SUPPORT": "ON",
+        "RDK_BUILD_XYZ2MOL_SUPPORT": "ON",
+        "RDK_BUILD_CAIRO_SUPPORT": "ON",
+        "RDK_BUILD_QT_SUPPORT": "OFF",
+        "RDK_BUILD_SWIG_WRAPPERS": "OFF",
+        "RDK_SWIG_STATIC": "OFF",
+        "RDK_BUILD_THREADSAFE_SSS": "ON",
+        "RDK_TEST_MULTITHREADED": "ON",
+        "RDK_BUILD_CFFI_LIB": "OFF"
       }
+    },
+    {
+      "name": "vcpkg-release-werror",
+      "displayName": "vcpkg | Release (Werror)",
+      "inherits": "vcpkg-release"
     },
     {
       "name": "vcpkg-debug",
@@ -25,6 +51,25 @@
         "CMAKE_BUILD_TYPE": "Debug"
       }
     }
+  ],
+  "buildPresets": [
+    {
+      "name": "vcpkg-release-build",
+      "displayName": "Build | vcpkg Release",
+      "configurePreset": "vcpkg-release",
+      "configuration": "Release"
+    },
+    {
+      "name": "vcpkg-release-werror-build",
+      "displayName": "Build | vcpkg Release (Werror)",
+      "configurePreset": "vcpkg-release-werror",
+      "configuration": "Release"
+    },
+    {
+      "name": "vcpkg-debug-build",
+      "displayName": "Build | vcpkg Debug",
+      "configurePreset": "vcpkg-debug",
+      "configuration": "Debug"
+    }
   ]
 }
-
