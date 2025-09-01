@@ -7,6 +7,7 @@
     "boost-iostreams",
     "boost-serialization",
     "boost-graph",
+    "boost-core",
     "boost-smart-ptr",
     "bzip2",
     "cairo",
